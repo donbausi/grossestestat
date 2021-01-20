@@ -2,51 +2,52 @@
 /* Person.h
 TestGross: Klassen
 - Person - konkret
-Loose, 18.12.2019
+J. Durchstecher, 18.12.2019
 */
 
 #include <iostream>
 #include <string>
-#include "Haus.h" 
-#include "Fahrzeug.h"
-#include "PKW.h"
-#include "Bike.h"
+#include <vector> 
+#include "Medium.h"
+#include "Bibliothek.h"
+#include "Film.h"
+
 
 using namespace std;
 
-class Person : public PKW, public Bike, public Haus
+class Person 
 {
+////////////////////////////////////////////////////////////////////
+// Erweiterungen - Anfang
 private:
-	string Name;
-	int Alter;
-	PKW* benutztePKW;
-	Fahrzeug* besitzteFahrzeuge;
-	int count;
+	string name;
+	int alter;
+	Medium** medListe;
+	int anzahlMed;
+
 public:
-
-	Person(string name = string("harry"), int alter = 100);
-	//Person(const PKW p, const  Bike b,const Haus h);
+	Person(string name = "Meier", int alter = 50);
 	Person(const Person& st);
-	~Person() {};
-	string getName() const { return Name; }
-	void setName(string name) { Name = name; }
-	int getAlter() const { return Alter; }
-	void setAlter(int alter) { Alter = alter; }
-	PKW getBenutzePKW() const { return *this->benutztePKW; }
-	void setBenutzePKW(PKW p) { this->benutztePKW = &p; }
-	//Fahrzeug[] getBesitztFahrzeuge() const { return besitzteFahrzeuge; }
-	/*void setBesitztFahrzeuge(Fahrzeug[] f) {
-		this.besitzteFahrzeuge
-			= f;
-	}*/
+	~Person()
+	{
+		////////////////////////////////////////////////////////////////////
+		// Erweiterungen - Anfang
+		// Erweiterungen - Ende
+		////////////////////////////////////////////////////////////////////
+	}
 
-	void benutzePKW(const PKW p);
-	inline void besitztFahrzeuge(const Fahrzeug& f)
-		;
+	string getName() const { return name; }
+	void setName(string name) { this->name = name; }
+
+	int getAlter() const { return alter; }
+	void setAlter(int alter) { this->alter = alter; }
+
+	///////////////////////////
+	void leiheMedium(Medium f, Bibliothek <Medium> bib);
+	void createMediumListe(Medium** meds, int anzahl);
+	void rueckgabeMedium(Medium f, Bibliothek <Medium> bib);
 
 	const Person& operator = (const Person& f);
 	friend ostream& operator << (ostream& s, const Person& z);
-	friend istream& operator >> (istream& s, Person& z);
-
 };
 
